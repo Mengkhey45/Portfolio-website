@@ -6,10 +6,9 @@ const Home = () => {
   const navigate = useNavigate();
 
   return (
-    <section className="min-h-screen flex flex-col bg-black">
-      {/* Add padding-top to prevent navbar overlap */}
+    <section className="min-h-screen flex flex-col bg-black pt-20"> {/* Add padding to prevent navbar overlap */}
       <div className="flex-grow flex items-center justify-center px-5">
-        <div className="md:mt-20 lg:mt-10 flex flex-col lg:flex-row items-center gap-10 text-center lg:text-left bg-opacity-50 p-10 rounded-lg">
+        <div className="md:mt-10 lg:mt-0 flex flex-col lg:flex-row items-center gap-10 text-center lg:text-left bg-opacity-50 p-10 rounded-lg">
           <div className='fade-in-left lg:h-120 xl:h-127 backdrop-blur-md flex items-center ring-3 text-white'>
             <img className="size-70 md:size-90 lg:size-100 2xl:size-120" src={profile} alt="profile" />
           </div>
