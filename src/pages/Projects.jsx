@@ -41,7 +41,7 @@ const Project = () => {
               initial={{ opacity: 0, y: -40 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: index * 0.5 }} // Staggered animation
-              className="flex flex-col w-80 bg-gradient-to-r from-zinc-600 via-stone-700 to-zinc-800 p-5 rounded-lg shadow-lg"
+              className="flex flex-col w-80 bg-gradient-to-r from-zinc-800 via-stone-800 to-zinc-800 p-5 rounded-lg shadow-lg"
             >
               <img className="w-full h-50 lg:h-60 object-cover" src={project.img} alt={project.title} />
               <div className="mt-3">

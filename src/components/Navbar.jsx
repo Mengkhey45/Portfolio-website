@@ -58,7 +58,7 @@ const Navbar = () => {
 
       {/* Mobile Menu */}
       {isMenuOpen && (
-        <ul className="lg:hidden absolute top-20 left-0 w-full bg-gradient-to-r from-indigo-500 via-pink-300 to-purple-700 shadow-md flex flex-col items-center transition-all duration-300">
+        <ul className="lg:hidden absolute top-20 left-0 w-full bg-gradient-to-r from-indigo-600 via-pink-400 to-purple-700 shadow-md flex flex-col items-center transition-all duration-300">
           {navItems.map((item) => (
             <li key={item.name} className="w-full text-center">
               <Link

@@ -34,7 +34,7 @@ const Services = () => {
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: index * 0.2 }}
-              className='ring-2 text-white/30 flex flex-col items-center justify-center bg-gradient-to-r from-zinc-800 via-stone-600 to-zinc-900 text-center w-80 h-80 p-5 rounded-lg shadow-lg'
+              className='ring-1 text-white/10 flex flex-col items-center justify-center bg-gradient-to-r from-zinc-800 via-stone-700 to-zinc-900 text-center w-80 h-80 p-5 rounded-lg shadow-lg'
             >
               <div className='w-18 h-18 bg-gray-300 drop-shadow-lg ring-2 text-amber-600 flex items-center justify-center rounded-full mb-5'>
                 <img src={service.image} alt={service.title} className='w-13 h-13'/>
