@@ -41,7 +41,7 @@ const Footer = () => {
       </div>
 
       {/* Social Media Links and Copyright */}
-      <div className="absolute bottom-0 z-30 py-6 w-full border-t-[1px] border-white/10 backdrop-blur-lg lg:bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 flex flex-col lg:flex-row-reverse items-center justify-around gap-3">
+      <div className="absolute bottom-0 z-30 py-6 w-full border-t-[1px] border-white/10 backdrop-blur-lg lg:bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-400 flex flex-col lg:flex-row-reverse items-center justify-around gap-3">
         <div className="flex justify-between items-center w-full max-w-60 bg-gradient-to-r bg-clip-text from-cyan-200 via-blue-300 to-indigo-400">
           <a className=" transition-transform duration-300 hover:-translate-y-1" href="https://web.facebook.com/profile.php?id=100094491694329">
             <i className="bx bxl-facebook hover:text-white text-transparent text-2xl"></i>

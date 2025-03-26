@@ -21,11 +21,11 @@ const Navbar = () => {
 
   return (
     <header className="fixed flex items-center justify-center w-full px-6 h-20 z-50 bg-white/30 backdrop-blur-xs shadow-md">
-      <nav className="h-10 w-full  flex justify-between xl:max-w-[1320px] rounded-full items-center px-6 lg:pr-16 bg-white">
+      <nav className="h-10 w-full  flex justify-between xl:max-w-[1320px] rounded-full items-center px-6 lg:pr-16 bg-linear-to-r from-blue-500 via-cyan-500 to-teal-500">
         {/* Logo Section */}
         <Link to="/" className="flex items-center" onClick={() => handleClick("Home")}>
           <img className="w-15 h-17 md:w-17 md:h-19 lg:size-20" src={logo} alt="logo" />
-          <h1 className="hidden lg:flex text-lg px-4 py-1 bg-gradient-to-r from-indigo-400 via-purple-500 to-pink-500 text-white font-bold">
+          <h1 className="hidden lg:flex text-lg px-4 py-[2px] bg-gradient-to-r from-indigo-600 via-purple-500 to-pink-400 text-white font-bold">
             Khorn Mengkhey
           </h1>
         </Link>
@@ -58,12 +58,12 @@ const Navbar = () => {
 
       {/* Mobile Menu */}
       {isMenuOpen && (
-        <ul className="lg:hidden absolute top-20 left-0 w-full bg-gradient-to-r from-indigo-600 via-pink-400 to-purple-700 shadow-md flex flex-col items-center transition-all duration-300">
+        <ul className="lg:hidden absolute top-20 left-0 w-full backdrop-blur-xl bg-black/40 shadow-md flex flex-col items-center transition-all duration-300">
           {navItems.map((item) => (
             <li key={item.name} className="w-full text-center">
               <Link
                 to={item.href}
-                className="block w-full py-3 text-black text-lg font-semibold hover:bg-linear-to-r from-blue-500 via-cyan-500 to-teal-500"
+                className="block w-full py-3 text-white text-lg font-semibold hover:bg-linear-to-r from-blue-500 via-cyan-500 to-teal-500"
                 onClick={() => handleClick(item.name)}
               >
                 {item.name}
