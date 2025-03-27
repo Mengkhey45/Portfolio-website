@@ -46,10 +46,10 @@ const Project = () => {
               <img className="w-full h-50 lg:h-60 object-cover" src={project.img} alt={project.title} />
               <div className="mt-3">
                 <h3 className="text-lg font-semibold text-white">{project.title}</h3>
-                <p className="text-gray-200">{project.description}</p>
+                <p className="text-gray-300">{project.description}</p>
 
                 {/* Technologies Used */}
-                <div className="grid grid-cols-8 gap-2 mt-0">
+                <div className="grid grid-cols-8 gap-2 mt-2">
                   {project.technologies.map((tech, idx) => (
                     <i key={idx} className={`bx ${tech.icon} text-2xl ${tech.color}`}></i>
                   ))}
