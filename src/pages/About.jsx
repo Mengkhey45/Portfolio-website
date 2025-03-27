@@ -27,16 +27,16 @@ const About = () => {
           <article className="bg-black ring-2 p-4 mt-6 rounded-sm shadow-lg">
             <h3 className="text-white font-bold text-lg mb-3 text-start">My Skills</h3>
             <div className="grid grid-cols-6 items-center gap-2">
-              <i className='bx bxl-html5 text-2xl text-orange-600'></i>
-              <i className='bx bxl-css3 text-2xl text-blue-600'></i>
-              <i className='bx bxl-javascript text-2xl text-yellow-400'></i>
-              <i className="fa-brands fa-react text-2xl text-sky-400"></i>
-              <img className='size-6' src="https://img.icons8.com/?size=100&id=CIAZz2CYc6Kc&format=png&color=000000" alt="Vue.js" />
-              <img className='size-6' src={python} alt="Python" />
-              <img className='size-5' src={django} alt="Django" />
-              <img className='size-5' src={flutter} alt="Flutter" />
-              <img className='size-5' src={dart} alt="Dart" />
-              <img className='size-8' src={typescript} alt="TypeScript" />
+              <i className='bx bxl-html5 text-2xl text-orange-600 transition-transform duration-300 hover:-translate-y-1'></i>
+              <i className='bx bxl-css3 text-2xl text-blue-600 transition-transform duration-300 hover:-translate-y-1'></i>
+              <i className='bx bxl-javascript text-2xl text-yellow-400 transition-transform duration-300 hover:-translate-y-1'></i>
+              <i className="fa-brands fa-react text-2xl text-sky-400 transition-transform duration-300 hover:-translate-y-1"></i>
+              <img className='size-6 transition-transform duration-300 hover:-translate-y-1' src="https://img.icons8.com/?size=100&id=CIAZz2CYc6Kc&format=png&color=000000" alt="Vue.js" />
+              <img className='size-6 transition-transform duration-300 hover:-translate-y-1' src={python} alt="Python" />
+              <img className='size-5 transition-transform duration-300 hover:-translate-y-1' src={django} alt="Django" />
+              <img className='size-5 transition-transform duration-300 hover:-translate-y-1' src={flutter} alt="Flutter" />
+              <img className='size-5 transition-transform duration-300 hover:-translate-y-1' src={dart} alt="Dart" />
+              <img className='size-8 transition-transform duration-300 hover:-translate-y-1' src={typescript} alt="TypeScript" />
             </div>
           </article>
         </div>
