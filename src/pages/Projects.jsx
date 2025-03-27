@@ -46,17 +46,17 @@ const Project = () => {
               <img className="w-full h-50 lg:h-60 object-cover" src={project.img} alt={project.title} />
               <div className="mt-3">
                 <h3 className="text-lg font-semibold text-white">{project.title}</h3>
-                <p className="text-gray-300">{project.description}</p>
+                <p className="text-white/80">{project.description}</p>
 
                 {/* Technologies Used */}
-                <div className="grid grid-cols-8 gap-2 mt-2">
+                <div className="grid grid-cols-8 gap-2  mt-2">
                   {project.technologies.map((tech, idx) => (
-                    <i key={idx} className={`bx ${tech.icon} text-2xl ${tech.color}`}></i>
+                    <i key={idx} className={`bx ${tech.icon} text-2xl ${tech.color} transition-transform duration-300 hover:-translate-y-1`}></i>
                   ))}
                 </div>
 
                 {/* View Project Link */}
-                <p className="mt-3 flex items-center gap-2 cursor-pointer text-white">
+                <p className="mt-3 flex items-center gap-2 cursor-pointer hover:text-white/80 text-white">
                   <a href={project.link} target="_blank" rel="noopener noreferrer">
                     <i className="bx bx-link-alt"></i> View project
                   </a>
