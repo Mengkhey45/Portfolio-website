@@ -58,7 +58,7 @@ const Navbar = () => {
 
       {/* Mobile Menu */}
       {isMenuOpen && (
-        <ul className="lg:hidden absolute top-20 left-0 w-full backdrop-blur-xl bg-black/40 shadow-md flex flex-col items-center transition-all duration-300">
+        <ul className="lg:hidden absolute top-20 left-0 w-full backdrop-blur-xl bg-black/50 shadow-md flex flex-col items-center transition-all duration-300">
           {navItems.map((item) => (
             <li key={item.name} className="w-full text-center">
               <Link
