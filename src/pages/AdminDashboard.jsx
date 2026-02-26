@@ -1,173 +1,157 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
-import { useAdminAuth } from '../context/AdminAuthContext';
+import { useNavigate } from 'react-router-dom';
 import { useProjects } from '../context/ProjectsContext';
+import { useAdminAuth } from '../context/AdminAuthContext';
+import { motion } from 'framer-motion';
 import AdminHeader from '../components/AdminHeader';
 
 const AdminDashboard = () => {
-  const { currentEmail } = useAdminAuth();
+  const navigate = useNavigate();
   const { projects, deleteProject } = useProjects();
-  const [confirmDelete, setConfirmDelete] = useState(null);
+  const { logout } = useAdminAuth();
+  const [deleteConfirm, setDeleteConfirm] = useState(null);
 
-  const handleDeleteProject = (id) => {
+  const handleDelete = (id) => {
     deleteProject(id);
-    setConfirmDelete(null);
+    setDeleteConfirm(null);
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-slate-900 via-slate-800 to-slate-900 text-white">
+    <div className="flex justify-center bg-black items-center h-auto relative min-h-screen">
       <AdminHeader />
-
-      <main className="px-4 md:px-8 py-12 max-w-7xl mx-auto">
-        {/* Welcome Section */}
-        <div className="mb-12">
-          <h1 className="text-4xl font-bold mb-2">Dashboard</h1>
-          <p className="text-slate-400">
-            Logged in as <span className="font-semibold text-blue-400">{currentEmail}</span>
-          </p>
+      
+      <section className="flex z-20 my-20 lg:mt-30 flex-col items-center gap-10 p-5 w-full pt-20">
+        <div className='px-5 md:px-16 animate-fade-down w-full'>
+          <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-6 mb-8">
+            <div>
+              <h1 className="text-center md:text-left mb-5 text-5xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-purple-200 via-purple-400 to-purple-800">
+                My Projects
+              </h1>
+              <p className='text-white/80 leading-7 lg:text-lg max-w-80 md:max-w-168 xl:max-w-255'>
+                Manage your portfolio projects. Create, edit, or delete projects to showcase your work.
+              </p>
+            </div>
+            <button
+              onClick={() => navigate('/admin/project/new')}
+              className="px-8 py-3 bg-gradient-to-r from-indigo-400 via-pink-400 to-purple-500 rounded-lg font-semibold text-white hover:shadow-2xl transition-all duration-300 hover:scale-105 flex items-center gap-2 whitespace-nowrap"
+            >
+              <i className="bx bx-plus text-2xl"></i>
+              Add Project
+            </button>
+          </div>
         </div>
 
-        {/* Create New Project Button */}
-        <div className="mb-8">
-          <Link
-            to="/admin/project/new"
-            className="inline-block px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white font-bold rounded-lg transition-colors"
-          >
-            + Create New Project
-          </Link>
-        </div>
-
-        {/* Projects List */}
-        <div className="bg-slate-800 rounded-lg border border-slate-700 overflow-hidden">
-          {projects.length === 0 ? (
-            <div className="p-8 text-center">
-              <p className="text-slate-400 mb-4">No projects yet.</p>
-              <Link
-                to="/admin/project/new"
-                className="text-blue-400 hover:text-blue-300 underline"
+        {projects.length === 0 ? (
+          <div className="flex flex-col items-center justify-center py-20 w-full">
+            <i className="bx bx-folder-open text-6xl text-white/50 mb-4"></i>
+            <p className="text-white/60 text-lg mb-6">No projects yet. Create your first project!</p>
+            <button
+              onClick={() => navigate('/admin/project/new')}
+              className="px-6 py-3 bg-gradient-to-r from-indigo-400 via-pink-400 to-purple-500 rounded-lg font-semibold text-white hover:shadow-lg transition"
+            >
+              Create Project
+            </button>
+          </div>
+        ) : (
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 gap-y-8 md:gap-x-5 xl:gap-y-10 w-full px-5">
+            {projects.map((project, index) => (
+              <motion.article
+                key={project.id}
+                initial={{ opacity: 0, y: -40 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8, delay: index * 0.1 }}
+                className="flex flex-col w-80 bg-gradient-to-r from-zinc-800 via-stone-800 to-zinc-800 p-5 rounded-lg shadow-lg relative group"
               >
-                Create your first project
-              </Link>
-            </div>
-          ) : (
-            <div className="overflow-x-auto">
-              <table className="w-full">
-                <thead className="border-b border-slate-700 bg-slate-700/50">
-                  <tr>
-                    <th className="px-6 py-4 text-left font-semibold">Title</th>
-                    <th className="px-6 py-4 text-left font-semibold">Tags</th>
-                    <th className="px-6 py-4 text-left font-semibold">Updated</th>
-                    <th className="px-6 py-4 text-right font-semibold">Actions</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {projects.map((project) => (
-                    <tr
-                      key={project.id}
-                      className="border-b border-slate-700 hover:bg-slate-700/30 transition-colors"
+                {/* Project Thumbnail */}
+                <div className="relative overflow-hidden rounded">
+                  {project.thumbnail ? (
+                    <img 
+                      className="w-full h-50 lg:h-60 object-cover group-hover:scale-110 transition-transform duration-300" 
+                      src={project.thumbnail} 
+                      alt={project.title} 
+                    />
+                  ) : (
+                    <div className="w-full h-50 lg:h-60 bg-gray-700 flex items-center justify-center rounded">
+                      <i className="bx bx-image text-4xl text-white/50"></i>
+                    </div>
+                  )}
+                  {/* Action Buttons Overlay */}
+                  <div className="absolute inset-0 bg-black/70 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center gap-3">
+                    <button
+                      onClick={() => navigate(`/admin/project/${project.id}/edit`)}
+                      className="px-4 py-2 bg-blue-500 hover:bg-blue-600 rounded-lg font-semibold text-white transition flex items-center gap-2"
+                      title="Edit project"
                     >
-                      <td className="px-6 py-4">
-                        <div>
-                          <p className="font-semibold text-white">{project.title}</p>
-                          <p className="text-slate-400 text-sm">
-                            {project.shortDescription || project.description}
-                          </p>
-                        </div>
-                      </td>
-                      <td className="px-6 py-4">
-                        <div className="flex flex-wrap gap-1">
-                          {project.tags && project.tags.slice(0, 2).map((tag, index) => (
-                            <span
-                              key={index}
-                              className="px-2 py-1 bg-slate-600 text-xs rounded"
-                            >
-                              {tag}
-                            </span>
-                          ))}
-                          {project.tags && project.tags.length > 2 && (
-                            <span className="px-2 py-1 bg-slate-600 text-xs rounded">
-                              +{project.tags.length - 2}
-                            </span>
-                          )}
-                        </div>
-                      </td>
-                      <td className="px-6 py-4 text-slate-400 text-sm">
-                        {new Date(project.updatedAt).toLocaleDateString()}
-                      </td>
-                      <td className="px-6 py-4 text-right">
-                        <div className="flex justify-end gap-2">
-                          <Link
-                            to={`/admin/project/${project.id}`}
-                            className="px-3 py-1 bg-slate-600 hover:bg-slate-500 text-sm rounded transition-colors"
-                          >
-                            Preview
-                          </Link>
-                          <Link
-                            to={`/admin/project/${project.id}/edit`}
-                            className="px-3 py-1 bg-blue-600 hover:bg-blue-700 text-sm rounded transition-colors"
-                          >
-                            Edit
-                          </Link>
-                          <button
-                            onClick={() => setConfirmDelete(project.id)}
-                            className="px-3 py-1 bg-red-600 hover:bg-red-700 text-sm rounded transition-colors"
-                          >
-                            Delete
-                          </button>
-                        </div>
-                      </td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-            </div>
-          )}
-        </div>
+                      <i className="bx bx-edit"></i>
+                      Edit
+                    </button>
+                    <button
+                      onClick={() => setDeleteConfirm(project.id)}
+                      className="px-4 py-2 bg-red-500 hover:bg-red-600 rounded-lg font-semibold text-white transition flex items-center gap-2"
+                      title="Delete project"
+                    >
+                      <i className="bx bx-trash"></i>
+                      Delete
+                    </button>
+                  </div>
+                </div>
 
-        {/* Statistics */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-8">
-          <div className="bg-slate-800 border border-slate-700 rounded-lg p-6">
-            <p className="text-slate-400 text-sm">Total Projects</p>
-            <p className="text-3xl font-bold text-white mt-2">{projects.length}</p>
+                <div className="mt-3">
+                  <h3 className="text-lg font-semibold text-white truncate">{project.title}</h3>
+                  <p className="text-white/80 text-sm line-clamp-2">{project.description}</p>
+
+                  {/* Tags/Technologies */}
+                  {project.tags && project.tags.length > 0 && (
+                    <div className="flex flex-wrap gap-2 mt-3">
+                      {project.tags.slice(0, 3).map((tag, idx) => (
+                        <span 
+                          key={idx} 
+                          className="text-xs px-2 py-1 bg-purple-500/30 text-purple-200 rounded-full"
+                        >
+                          {tag}
+                        </span>
+                      ))}
+                      {project.tags.length > 3 && (
+                        <span className="text-xs px-2 py-1 bg-purple-500/30 text-purple-200 rounded-full">
+                          +{project.tags.length - 3}
+                        </span>
+                      )}
+                    </div>
+                  )}
+                </div>
+              </motion.article>
+            ))}
           </div>
-          <div className="bg-slate-800 border border-slate-700 rounded-lg p-6">
-            <p className="text-slate-400 text-sm">With Images</p>
-            <p className="text-3xl font-bold text-white mt-2">
-              {projects.filter((p) => p.images && p.images.length > 0).length}
-            </p>
-          </div>
-          <div className="bg-slate-800 border border-slate-700 rounded-lg p-6">
-            <p className="text-slate-400 text-sm">With Links</p>
-            <p className="text-3xl font-bold text-white mt-2">
-              {projects.filter((p) => p.links && p.links.length > 0).length}
-            </p>
-          </div>
-        </div>
-      </main>
+        )}
+      </section>
 
       {/* Delete Confirmation Modal */}
-      {confirmDelete && (
-        <div className="fixed inset-0 bg-black/50 flex items-center justify-center px-4 z-50">
-          <div className="bg-slate-800 border border-slate-700 rounded-lg p-6 max-w-sm w-full">
-            <h3 className="text-xl font-bold text-white mb-4">Delete Project?</h3>
-            <p className="text-slate-400 mb-6">
-              This action cannot be undone. Are you sure you want to delete this project?
+      {deleteConfirm && (
+        <div className="fixed inset-0 bg-black/70 flex items-center justify-center z-50 p-4">
+          <motion.div
+            initial={{ scale: 0.95, opacity: 0 }}
+            animate={{ scale: 1, opacity: 1 }}
+            className="bg-gradient-to-r from-zinc-800 via-stone-800 to-zinc-800 border border-purple-500/30 rounded-lg p-6 max-w-sm w-full"
+          >
+            <h3 className="text-xl font-bold text-white mb-2">Delete Project?</h3>
+            <p className="text-white/60 mb-6">
+              Are you sure you want to delete this project? This action cannot be undone.
             </p>
-            <div className="flex gap-4">
+            <div className="flex gap-3">
               <button
-                onClick={() => handleDeleteProject(confirmDelete)}
-                className="flex-1 py-2 bg-red-600 hover:bg-red-700 text-white rounded font-semibold transition-colors"
-              >
-                Delete
-              </button>
-              <button
-                onClick={() => setConfirmDelete(null)}
-                className="flex-1 py-2 bg-slate-600 hover:bg-slate-500 text-white rounded font-semibold transition-colors"
+                onClick={() => setDeleteConfirm(null)}
+                className="flex-1 px-4 py-2 bg-gray-700 hover:bg-gray-600 rounded-lg text-white transition"
               >
                 Cancel
               </button>
+              <button
+                onClick={() => handleDelete(deleteConfirm)}
+                className="flex-1 px-4 py-2 bg-red-600 hover:bg-red-700 rounded-lg text-white transition"
+              >
+                Delete
+              </button>
             </div>
-          </div>
+          </motion.div>
         </div>
       )}
     </div>

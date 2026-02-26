@@ -37,25 +37,23 @@ const AdminProjectEditor = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-slate-900 via-slate-800 to-slate-900 text-white">
+    <div className="min-h-screen bg-black text-white">
       <AdminHeader />
 
-      <main className="px-4 md:px-8 py-12 max-w-4xl mx-auto">
-        <div className="mb-8">
-          <h1 className="text-4xl font-bold mb-2">
+      <main className="px-4 md:px-8 py-12 max-w-5xl mx-auto pt-24">
+        <div className="mb-12 text-center">
+          <h1 className="text-5xl font-bold mb-3 text-transparent bg-clip-text bg-gradient-to-r from-purple-200 via-purple-400 to-purple-800">
             {isEditMode ? 'Edit Project' : 'Create New Project'}
           </h1>
-          <p className="text-slate-400">
-            {isEditMode
-              ? 'Update project details and media'
-              : 'Add a new project to your portfolio'}
+          <p className="text-white/60 text-lg">
+            {isEditMode ? 'Update your project details' : 'Add a new project to your portfolio'}
           </p>
         </div>
 
         {/* Success Message */}
         {successMessage && (
-          <div className="mb-6 p-4 bg-green-500/10 border border-green-500 rounded-lg">
-            <p className="text-green-400">{successMessage}</p>
+          <div className="mb-6 p-4 bg-green-500/10 border border-green-500/50 rounded-lg text-green-400 text-center">
+            {successMessage}
           </div>
         )}
 

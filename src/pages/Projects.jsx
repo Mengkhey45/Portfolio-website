@@ -1,4 +1,5 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import lord from '../assets/img/blacklord.jpg';
 import project1 from '../assets/img/project1.png';
@@ -22,6 +23,8 @@ const projects = [
 ];
 
 const Project = () => {
+  const navigate = useNavigate();
+
   return (
     <div className="flex justify-center bg-black items-center h-auto relative">
       <section className="flex z-20 my-20 lg:mt-30 flex-col items-center gap-10 p-5 w-full">
@@ -30,7 +33,7 @@ const Project = () => {
             My Projects
           </h1>
           <p className='text-white/80 leading-7 lg:text-lg max-w-80 md:max-w-168 xl:max-w-255'>
-            As a software engineering student, I’ve worked on projects in web development, App development, and cybersecurity. Key projects include the Slogos Project, Travel Website, a Python-learning game, and research on cybersecurity and emerging technologies. These experiences enhance my problem-solving, technical skills, and ability to create impactful solutions.
+            As a software engineering student, I've worked on projects in web development, App development, and cybersecurity. Key projects include the Slogos Project, Travel Website, a Python-learning game, and research on cybersecurity and emerging technologies. These experiences enhance my problem-solving, technical skills, and ability to create impactful solutions.
           </p>
         </div>
 
@@ -40,10 +43,11 @@ const Project = () => {
               key={index}
               initial={{ opacity: 0, y: -40 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: index * 0.5 }} // Staggered animation
-              className="flex flex-col w-80 bg-gradient-to-r from-zinc-800 via-stone-800 to-zinc-800 p-5 rounded-lg shadow-lg"
+              transition={{ duration: 0.8, delay: index * 0.5 }}
+              onClick={() => navigate(`/project/${index}`)}
+              className="flex flex-col w-80 bg-gradient-to-r from-zinc-800 via-stone-800 to-zinc-800 p-5 rounded-lg shadow-lg cursor-pointer hover:shadow-2xl hover:scale-105 transition-all duration-300"
             >
-              <img className="w-full h-50 lg:h-60 object-cover" src={project.img} alt={project.title} />
+              <img className="w-full h-50 lg:h-60 object-cover rounded" src={project.img} alt={project.title} />
               <div className="mt-3">
                 <h3 className="text-lg font-semibold text-white">{project.title}</h3>
                 <p className="text-white/80">{project.description}</p>
